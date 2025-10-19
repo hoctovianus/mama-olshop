@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Online - Belanja Mudah dan Nyaman</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header dan Navigasi -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="https://picsum.photos/1920/1080?random=1" alt="Logo Toko Online">
+                <h1>TokoOnline</h1>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#products">Produk</a></li>
+                    <li><a href="#about">Tentang Kami</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Slider Utama -->
+    <section id="home" class="hero-slider">
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide active">
+                    <img src="https://picsum.photos/1920/1080?random=2" alt="Promo Spesial">
+                    <div class="slide-content">
+                        <h2>Promo Spesial Akhir Tahun</h2>
+                        <p>Dapatkan diskon hingga 50% untuk semua produk</p>
+                        <a href="#products" class="btn">Beli Sekarang</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://picsum.photos/1920/1080?random=3" alt="Produk Terbaru">
+                    <div class="slide-content">
+                        <h2>Koleksi Terbaru 2023</h2>
+                        <p>Temukan produk terbaru dengan kualitas terbaik</p>
+                        <a href="#products" class="btn">Lihat Produk</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://picsum.photos/1920/1080?random=4" alt="Gratis Ongkir">
+                    <div class="slide-content">
+                        <h2>Gratis Ongkir</h2>
+                        <p>Gratis ongkir untuk pembelian di atas Rp 500.000</p>
+                        <a href="#products" class="btn">Belanja Sekarang</a>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-btn prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daftar Produk -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Produk Kami</h2>
+            <div class="product-grid">
+                <!-- Produk 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/1920/1080?random=5" alt="Produk 1">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Smartphone X1</h3>
+                        <p class="product-description">Smartphone dengan kamera 48MP, RAM 8GB, dan baterai 5000mAh.</p>
+                        <div class="product-price">Rp 3.499.000</div>
+                        <button class="add-to-cart" data-id="1" data-name="Smartphone X1" data-price="3499000" data-image="https://picsum.photos/1920/1080?random=6">
+                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Produk 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/1920/1080?random=7" alt="Produk 2">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Laptop Pro 15</h3>
+                        <p class="product-description">Laptop dengan prosesor Intel i7, RAM 16GB, dan SSD 512GB.</p>
+                        <div class="product-price">Rp 12.999.000</div>
+                        <button class="add-to-cart" data-id="2" data-name="Laptop Pro 15" data-price="12999000" data-image="https://picsum.photos/1920/1080?random=8">
+                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Produk 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/1920/1080?random=9" alt="Produk 3">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Headphone Wireless</h3>
+                        <p class="product-description">Headphone dengan noise cancellation dan baterai tahan 30 jam.</p>
+                        <div class="product-price">Rp 1.299.000</div>
+                        <button class="add-to-cart" data-id="3" data-name="Headphone Wireless" data-price="1299000" data-image="https://picsum.photos/1920/1080?random=9">
+                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Produk 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/1920/1080?random=10" alt="Produk 4">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Smart Watch</h3>
+                        <p class="product-description">Smartwatch dengan fitur kesehatan, GPS, dan tahan air.</p>
+                        <div class="product-price">Rp 899.000</div>
+                        <button class="add-to-cart" data-id="4" data-name="Smart Watch" data-price="899000" data-image="https://picsum.photos/1920/1080?random=10">
+                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Produk 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/1920/1080?random=11" alt="Produk 5">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Tablet Mini</h3>
+                        <p class="product-description">Tablet 8 inci dengan layar HD, RAM 4GB, dan penyimpanan 64GB.</p>
+                        <div class="product-price">Rp 2.499.000</div>
+                        <button class="add-to-cart" data-id="5" data-name="Tablet Mini" data-price="2499000" data-image="https://picsum.photos/1920/1080?random=11">
+                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Produk 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://picsum.photos/1920/1080?random=12" alt="Produk 6">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Kamera DSLR</h3>
+                        <p class="product-description">Kamera DSLR dengan sensor 24MP dan lensa kit 18-55mm.</p>
+                        <div class="product-price">Rp 5.999.000</div>
+                        <button class="add-to-cart" data-id="6" data-name="Kamera DSLR" data-price="5999000" data-image="https://picsum.photos/1920/1080?random=12">
+                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keranjang Belanja -->
+    <div class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Keranjang Belanja</h2>
+                <span class="close-cart">&times;</span>
+            </div>
+            <div class="cart-body">
+                <div class="cart-items">
+                    <!-- Item keranjang akan ditampilkan di sini -->
+                </div>
+                <div class="cart-total">
+                    <p>Total: <span class="total-price">Rp 0</span></p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <button class="btn checkout-btn">Checkout</button>
+                <button class="btn clear-cart">Kosongkan Keranjang</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TokoOnline</h3>
+                    <p>Belanja mudah dan nyaman dengan berbagai pilihan produk berkualitas.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak Kami</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Contoh No. 123, Jakarta</p>
+                    <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> info@tokoonline.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Ikuti Kami</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 TokoOnline. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
