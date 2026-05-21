@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toko Online - Belanja Mudah dan Nyaman</title>
+    <link rel="icon" href="logo_markiel-olshop.png" type="image/png">
+    <title>markiel-olshop</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -12,8 +13,8 @@
     <header>
         <div class="container">
             <div class="logo">
-                <img src="https://picsum.photos/1920/1080?random=1" alt="Logo Toko Online">
-                <h1>TokoOnline</h1>
+                <img src="logo_markiel-olshop.png" alt="Logo markiel-olshop">
+                <h1>markiel-olshop</h1>
             </div>
             <nav class="navbar">
                 <ul class="nav-menu">
@@ -22,6 +23,14 @@
                     <li><a href="#about">Tentang Kami</a></li>
                     <li><a href="#contact">Kontak</a></li>
                 </ul>
+                <!-- DARK MODE TOGGLE -->
+                <div class="dark-mode-toggle" id="darkModeToggle" title="Ganti Mode Terang / Gelap">
+                    <i class="fas fa-sun toggle-icon-sun"></i>
+                    <div class="toggle-switch">
+                        <span class="toggle-knob"></span>
+                    </div>
+                    <i class="fas fa-moon toggle-icon-moon"></i>
+                </div>
                 <div class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
@@ -38,6 +47,41 @@
     <!-- Slider Utama -->
     <section id="home" class="hero-slider">
         <div class="slider-container">
+
+            <!-- ===== TOMBOL PUTAR MUSIK (kiri-atas, di bawah navbar) ===== -->
+            <button class="music-toggle" id="musicToggle" type="button"
+                    aria-label="Putar musik" title="Putar / jeda musik latar">
+                <i class="fas fa-music music-icon"></i>
+                <span class="music-label">Putar Musik</span>
+            </button>
+            <!-- Elemen audio (file mp3 ditaruh di folder yg sama dgn website ini)
+                 Daftar lagu (playlist) diatur di file script.js — cari: MUSIC_PLAYLIST -->
+            <audio id="bgMusic" preload="none"></audio>
+
+            <!-- ===== SOUND VISUALIZER (kanan-atas, di bawah hamburger menu) ===== -->
+            <div class="music-visualizer" id="musicVisualizer" aria-hidden="true">
+                <div class="vis-bars">
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                    <span class="vis-bar"></span>
+                </div>
+            </div>
+            <!-- Judul lagu yg sedang diputar (di bawah visualizer) -->
+            <div class="music-now-playing" id="musicNowPlaying" aria-live="polite"></div>
+            <!-- ===== /SOUND VISUALIZER ===== -->
+            <!-- ===== /TOMBOL PUTAR MUSIK ===== -->
+
             <div class="slider">
                 <div class="slide active">
                     <img src="https://picsum.photos/1920/1080?random=2" alt="Promo Spesial">
@@ -75,6 +119,8 @@
                 <span class="dot"></span>
                 <span class="dot"></span>
             </div>
+            <!-- Teks tagline di bawah gambar utama -->
+            <div class="hero-bottom-text">Ayo, semangat! momen hebat menantimu hari ini!<br>Kita sambut hari esok yang lebih baik!</div>
         </div>
     </section>
 
@@ -82,150 +128,745 @@
     <section id="products" class="products">
         <div class="container">
             <h2 class="section-title">Produk Kami</h2>
-            <div class="product-grid">
-                <!-- Produk 1 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://picsum.photos/1920/1080?random=5" alt="Produk 1">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Smartphone X1</h3>
-                        <p class="product-description">Smartphone dengan kamera 48MP, RAM 8GB, dan baterai 5000mAh.</p>
-                        <div class="product-price">Rp 3.499.000</div>
-                        <button class="add-to-cart" data-id="1" data-name="Smartphone X1" data-price="3499000" data-image="https://picsum.photos/1920/1080?random=6">
-                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Produk 2 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://picsum.photos/1920/1080?random=7" alt="Produk 2">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Laptop Pro 15</h3>
-                        <p class="product-description">Laptop dengan prosesor Intel i7, RAM 16GB, dan SSD 512GB.</p>
-                        <div class="product-price">Rp 12.999.000</div>
-                        <button class="add-to-cart" data-id="2" data-name="Laptop Pro 15" data-price="12999000" data-image="https://picsum.photos/1920/1080?random=8">
-                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
-                        </button>
-                    </div>
-                </div>
+            <!-- ===== TAB NAVIGASI ===== -->
+            <div class="tab-nav">
+                <button class="tab-btn active" data-tab="tab-pakaian">
+                    <i class="fas fa-tshirt"></i> Baju Wanita
+                </button>
+                <button class="tab-btn" data-tab="tab-makanan">
+                    <i class="fas fa-utensils"></i> Baju Pria
+                </button>
+            </div><!-- /tab-nav -->
+            <div class="tab-nav-floor"></div>
 
-                <!-- Produk 3 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://picsum.photos/1920/1080?random=9" alt="Produk 3">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Headphone Wireless</h3>
-                        <p class="product-description">Headphone dengan noise cancellation dan baterai tahan 30 jam.</p>
-                        <div class="product-price">Rp 1.299.000</div>
-                        <button class="add-to-cart" data-id="3" data-name="Headphone Wireless" data-price="1299000" data-image="https://picsum.photos/1920/1080?random=9">
-                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
-                        </button>
-                    </div>
-                </div>
+            <!-- ===== TAB 1 : PAKAIAN ===== -->
+            <div class="tab-content active" id="tab-pakaian">
+                <div class="product-grid">
 
-                <!-- Produk 4 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://picsum.photos/1920/1080?random=10" alt="Produk 4">
+                    <!-- Produk 1 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="baju1_kaftan queen1.png" alt="Kaftan Queen Marun">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">1# Kaftan Queen Marun</h3>
+                            <p class="product-description">Kaftan modern dengan tampilan mewah minimalis.</p>
+                            <div class="product-price">Rp 240.000</div>
+                            <button class="view-spec" data-spec-id="1">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="1" data-name="Kaftan Queen Marun" data-price="240000" data-weight="0.35" data-image="baju1_kaftan queen1.png">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Smart Watch</h3>
-                        <p class="product-description">Smartwatch dengan fitur kesehatan, GPS, dan tahan air.</p>
-                        <div class="product-price">Rp 899.000</div>
-                        <button class="add-to-cart" data-id="4" data-name="Smart Watch" data-price="899000" data-image="https://picsum.photos/1920/1080?random=10">
-                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Produk 5 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://picsum.photos/1920/1080?random=11" alt="Produk 5">
+                    <!-- Produk 2 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="baju2_katbol_marun.jpeg" alt="Atasan Katun Bolong 20000">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">2# Atasan Katun Bolong 20000</h3>
+                            <p class="product-description">Kebaya modern katun bolong dengan motif bordir floral, lengan 3/4 elegan & bros aksen bunga emas lepas-pasang. Cocok untuk kondangan, arisan & lebaran.</p>
+                            <div class="product-price">Rp 85.000</div>
+                            <button class="view-spec" data-spec-id="2">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="2" data-name="Atasan Katun Bolong 20000" data-price="85000" data-weight="0.3" data-image="baju2_katbol_marun.jpeg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Tablet Mini</h3>
-                        <p class="product-description">Tablet 8 inci dengan layar HD, RAM 4GB, dan penyimpanan 64GB.</p>
-                        <div class="product-price">Rp 2.499.000</div>
-                        <button class="add-to-cart" data-id="5" data-name="Tablet Mini" data-price="2499000" data-image="https://picsum.photos/1920/1080?random=11">
-                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Produk 6 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://picsum.photos/1920/1080?random=12" alt="Produk 6">
+                    <!-- Produk 3 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="baju3_gamis kanaya1.png" alt="Gamis Kanaya Dress Muslim Linen Bordir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">3# Gamis Kanaya Dress Muslim</h3>
+                            <p class="product-description">Tampil elegan dan memukau dengan koleksi Gamis Kanaya, gaun muslim panjang dengan desain sophisticated.</p>
+                            <div class="product-price">Rp 375.000</div>
+                            <button class="view-spec" data-spec-id="3">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="3" data-name="Gamis Kaftan Batik Modern" data-price="375000" data-weight="0.4" data-image="baju3_gamis kanaya1.png">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Kamera DSLR</h3>
-                        <p class="product-description">Kamera DSLR dengan sensor 24MP dan lensa kit 18-55mm.</p>
-                        <div class="product-price">Rp 5.999.000</div>
-                        <button class="add-to-cart" data-id="6" data-name="Kamera DSLR" data-price="5999000" data-image="https://picsum.photos/1920/1080?random=12">
-                            <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
-                        </button>
+
+                    <!-- Produk 4 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="baju4_strok malay1.png" alt="Setrok Malay Muslim Set Tradisional">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">4# Setrok Malay Muslim Set</h3>
+                            <p class="product-description">Setrok Malay Dress Muslim Set yang Memadukan Kesederhanaan dengan Kemewahan.</p>
+                            <div class="product-price">Rp 375.000</div>
+                            <button class="view-spec" data-spec-id="4">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="4" data-name="Celana Chino Pria" data-price="375000" data-weight="0.4" data-image="baju4_strok malay1.png">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
                     </div>
+
+                    <!-- Produk 5 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="baju9_jaket younger1.png" alt="Hoodie Jacket Zipper 507#">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">5# Hoodie Jacket Zipper 507#</h3>
+                            <p class="product-description">Jaket dirancang dengan paduan gaya kasual, modern dan fungsional.</p>
+                            <div class="product-price">Rp 150.000</div>
+                            <button class="view-spec" data-spec-id="5">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="5" data-name="Hoodie Jacket Zipper 507#" data-price="150000" data-weight="0.4" data-image="baju9_jaket younger1.png">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 6 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="baju6_kebaya1 olive green.jpeg" alt="Kebaya Brukat Mutiara Premium">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">6# Kebaya Brukat Mutiara Premium</h3>
+                            <p class="product-description">Anggun dan Mempesona di momen istimewa dengan Kebaya Brukat Mutiara Premium</p>
+                            <div class="product-price">Rp 185.000</div>
+                            <button class="view-spec" data-spec-id="6">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="6" data-name="Kebaya Brukat Mutiara Premium" data-price="185000" data-weight="0.4" data-image="baju8_kebaya1 biru muda.jpeg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <!-- Produk 7 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="baju7_rok_dress_navy.jpeg" alt="Rok Dress Kebaya Batik">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">7# Rok Dress Kebaya Batik</h3>
+                            <p class="product-description">Setelan 2 pieces — atasan kebaya batik dipadu rok A-line polos. Anggun untuk pesta, kondangan & kantor.</p>
+                            <div class="product-price">Rp 250.000</div>
+                            <button class="view-spec" data-spec-id="7">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="7" data-name="Rok Dress Kebaya Batik Modern" data-price="250000" data-weight="0.55" data-image="baju7_rok_dress_navy.jpeg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 8 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="baju8_dress_popline_purple.jpeg" alt="Dress Popline Floral Midi">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">8# Dress Popline Floral Midi</h3>
+                            <p class="product-description">Dress midi dengan motif floral eksklusif & belt aksen di pinggang. Anggun untuk arisan, kondangan, dinner & acara semi-formal.</p>
+                            <div class="product-price">Rp 195.000</div>
+                            <button class="view-spec" data-spec-id="8">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="8" data-name="Dress Popline Floral Midi" data-price="195000" data-weight="0.4" data-image="baju8_dress_popline_purple.jpeg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 9 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="baju9_marbela_mix_ceruti_pink.jpeg" alt="Gamis Marbela Mix Ceruti">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">9# Gamis Marbela Mix Ceruti</h3>
+                            <p class="product-description">Gamis syari mewah kombinasi kain marbela motif floral & ceruti polos di lengan. Elegan untuk pesta, kondangan & lebaran.</p>
+                            <div class="product-price">Rp 285.000</div>
+                            <button class="view-spec" data-spec-id="9">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="9" data-name="Gamis Marbela Mix Ceruti" data-price="285000" data-weight="0.55" data-image="baju9_marbela_mix_ceruti_pink.jpeg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 10 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="baju10_setelan_jumbo_blue.png" alt="Setelan Jumbo Floral Cotton Stretch">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">10# Setelan Jumbo Floral Cotton Stretch</h3>
+                            <p class="product-description">Setelan atasan + celana kulot motif bunga warna-warni. Bahan cotton stretch adem, pinggang karet elastis (fit XL–XXXL). Cocok untuk santai, hangout & arisan.</p>
+                            <div class="product-price">Rp 200.000</div>
+                            <button class="view-spec" data-spec-id="10">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="10" data-name="Setelan Jumbo Floral Cotton Stretch" data-price="200000" data-weight="0.6" data-image="baju10_setelan_jumbo_blue.png">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 11 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="baju11_kulot_maroon.jpeg" alt="Set Rok Jaguard Fukuro 40098">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">11# Set Rok Jaguard Fukuro 40098</h3>
+                            <p class="product-description">Setelan 2 pieces — atasan peplum + rok A-line plisket midi bahan Jaguard Fukuro dengan motif floral emboss elegan & belt lepas-pasang. Mewah untuk pesta & kondangan.</p>
+                            <div class="product-price">Rp 245.000</div>
+                            <button class="view-spec" data-spec-id="11">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="11" data-name="Set Rok Jaguard Fukuro 40098" data-price="245000" data-weight="0.55" data-image="baju11_kulot_maroon.jpeg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 12 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="baju12_katunbolong_maroon.jpeg" alt="Dres Katun Bolong 65617">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">12# Dres Katun Bolong 65617</h3>
+                            <p class="product-description">Dress midi katun bolong dengan motif bordir floral, lengan puff & belt aksen di pinggang. Elegan untuk kondangan, arisan & kantor.</p>
+                            <div class="product-price">Rp 245.000</div>
+                            <button class="view-spec" data-spec-id="12">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="12" data-name="Dres Katun Bolong 65617" data-price="245000" data-weight="0.55" data-image="baju12_katunbolong_maroon.jpeg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
+                <!-- Pagination -->
+                <div class="pagination" data-target="tab-pakaian">
+                    <button class="page-btn active" data-page="1" aria-label="Halaman 1">1</button>
+                    <button class="page-btn" data-page="2" aria-label="Halaman 2">2</button>
+                </div>
+            </div><!-- /tab-pakaian -->
+
+            <!-- ===== TAB 2 : MAKANAN ===== -->
+            <div class="tab-content" id="tab-makanan">
+                <div class="product-grid">
+
+                    <!-- Produk 13 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="baju13_cr002 purple.jpeg" alt="Kemeja Pria Kemko CR002">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">13# Kemeja Pria Kemko CR002</h3>
+                            <p class="product-description">Kemeja Pria kasual kualitas premium desain minimalis nyaman dipakai seharian</p>
+                            <div class="product-price">Rp 150.000</div>
+                            <button class="view-spec" data-spec-id="13">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="13" data-name="Kemeja Pria Kemko CR002" data-price="150000" data-weight="0.4" data-image="baju13_cr002_purple.jpeg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 14 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="baju14_batik1 biru.jpeg" alt="Batik Pria Lengan Panjang">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">14# Kemeja Batik Pria</h3>
+                            <p class="product-description">Batik pria lengan panjang motif eksklusif, kombinasi tradisional & modern.</p>
+                            <div class="product-price">Rp 150.000</div>
+                            <button class="view-spec" data-spec-id="14">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="14" data-name="Kemeja Batik Pria Lengan Panjang" data-price="150000" data-weight="0.4" data-image="baju14_batik1 biru.jpeg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 15 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="Under_prepared.jpg" alt="Produk Segera Hadir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">15# Produk Segera Hadir</h3>
+                            <p class="product-description">Produk ini sedang dalam tahap persiapan. Nantikan koleksi terbaru kami segera hadir!</p>
+                            <div class="product-price">Rp. TBA (To be Advised)</div>
+                            <button class="view-spec" data-spec-id="15">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="15" data-name="Produk Segera Hadir" data-price="0" data-weight="0.3" data-image="Under_prepared.jpg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 16 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="Under_prepared.jpg" alt="Produk Segera Hadir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">16# Produk Segera Hadir</h3>
+                            <p class="product-description">Produk ini sedang dalam tahap persiapan. Nantikan koleksi terbaru kami segera hadir!</p>
+                            <div class="product-price">Rp. TBA (To be Advised)</div>
+                            <button class="view-spec" data-spec-id="16">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="16" data-name="Produk Segera Hadir" data-price="0" data-weight="0.3" data-image="Under_prepared.jpg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 17 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="Under_prepared.jpg" alt="Produk Segera Hadir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">17# Produk Segera Hadir</h3>
+                            <p class="product-description">Produk ini sedang dalam tahap persiapan. Nantikan koleksi terbaru kami segera hadir!</p>
+                            <div class="product-price">Rp. TBA (To be Advised)</div>
+                            <button class="view-spec" data-spec-id="17">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="17" data-name="Produk Segera Hadir" data-price="0" data-weight="0.3" data-image="Under_prepared.jpg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 18 -->
+                    <div class="product-card" data-page="1">
+                        <div class="product-image">
+                            <img src="Under_prepared.jpg" alt="Produk Segera Hadir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">18# Produk Segera Hadir</h3>
+                            <p class="product-description">Produk ini sedang dalam tahap persiapan. Nantikan koleksi terbaru kami segera hadir!</p>
+                            <div class="product-price">Rp. TBA (To be Advised)</div>
+                            <button class="view-spec" data-spec-id="18">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="18" data-name="Produk Segera Hadir" data-price="0" data-weight="0.3" data-image="Under_prepared.jpg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <!-- Produk 19 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="Under_prepared.jpg" alt="Produk Segera Hadir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">19# Produk Segera Hadir</h3>
+                            <p class="product-description">Produk ini sedang dalam tahap persiapan. Nantikan koleksi terbaru kami segera hadir!</p>
+                            <div class="product-price">Rp. TBA (To be Advised)</div>
+                            <button class="view-spec" data-spec-id="19">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="19" data-name="Produk Segera Hadir" data-price="0" data-weight="0.3" data-image="Under_prepared.jpg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 20 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="Under_prepared.jpg" alt="Produk Segera Hadir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">20# Produk Segera Hadir</h3>
+                            <p class="product-description">Produk ini sedang dalam tahap persiapan. Nantikan koleksi terbaru kami segera hadir!</p>
+                            <div class="product-price">Rp. TBA (To be Advised)</div>
+                            <button class="view-spec" data-spec-id="20">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="20" data-name="Produk Segera Hadir" data-price="0" data-weight="0.3" data-image="Under_prepared.jpg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 21 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="Under_prepared.jpg" alt="Produk Segera Hadir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">21# Produk Segera Hadir</h3>
+                            <p class="product-description">Produk ini sedang dalam tahap persiapan. Nantikan koleksi terbaru kami segera hadir!</p>
+                            <div class="product-price">Rp. TBA (To be Advised)</div>
+                            <button class="view-spec" data-spec-id="21">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="21" data-name="Produk Segera Hadir" data-price="0" data-weight="0.3" data-image="Under_prepared.jpg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 22 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="Under_prepared.jpg" alt="Produk Segera Hadir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">22# Produk Segera Hadir</h3>
+                            <p class="product-description">Produk ini sedang dalam tahap persiapan. Nantikan koleksi terbaru kami segera hadir!</p>
+                            <div class="product-price">Rp. TBA (To be Advised)</div>
+                            <button class="view-spec" data-spec-id="22">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="22" data-name="Produk Segera Hadir" data-price="0" data-weight="0.3" data-image="Under_prepared.jpg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 23 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="Under_prepared.jpg" alt="Produk Segera Hadir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">23# Produk Segera Hadir</h3>
+                            <p class="product-description">Produk ini sedang dalam tahap persiapan. Nantikan koleksi terbaru kami segera hadir!</p>
+                            <div class="product-price">Rp. TBA (To be Advised)</div>
+                            <button class="view-spec" data-spec-id="23">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="23" data-name="Produk Segera Hadir" data-price="0" data-weight="0.3" data-image="Under_prepared.jpg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Produk 24 -->
+                    <div class="product-card" data-page="2">
+                        <div class="product-image">
+                            <img src="Under_prepared.jpg" alt="Produk Segera Hadir">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">24# Produk Segera Hadir</h3>
+                            <p class="product-description">Produk ini sedang dalam tahap persiapan. Nantikan koleksi terbaru kami segera hadir!</p>
+                            <div class="product-price">Rp. TBA (To be Advised)</div>
+                            <button class="view-spec" data-spec-id="24">
+                                <i class="fas fa-ruler-combined"></i> Lihat Detil
+                            </button>
+                            <button class="add-to-cart" data-id="24" data-name="Produk Segera Hadir" data-price="0" data-weight="0.3" data-image="Under_prepared.jpg">
+                                <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Pagination -->
+                <div class="pagination" data-target="tab-makanan">
+                    <button class="page-btn active" data-page="1" aria-label="Halaman 1">1</button>
+                    <button class="page-btn" data-page="2" aria-label="Halaman 2">2</button>
+                </div>
+            </div><!-- /tab-makanan -->
+
         </div>
     </section>
 
-    <!-- Keranjang Belanja -->
+    <!-- ============================================================
+         KERANJANG BELANJA — dengan fitur Cek Ongkir Real-Time
+         ============================================================ -->
     <div class="cart-modal">
         <div class="cart-content">
+
+            <!-- Header -->
             <div class="cart-header">
-                <h2>Keranjang Belanja</h2>
+                <h2><i class="fas fa-shopping-cart"></i> Keranjang Belanja</h2>
                 <span class="close-cart">&times;</span>
             </div>
-            <div class="cart-body">
-                <div class="cart-items">
-                    <!-- Item keranjang akan ditampilkan di sini -->
-                </div>
-                <div class="cart-total">
-                    <p>Total: <span class="total-price">Rp 0</span></p>
+
+            <!-- ===== TENGAH: HANYA daftar item, scrollable ===== -->
+            <div class="cart-middle">
+                <div class="cart-items-scroll">
+                    <div class="cart-items">
+                        <!-- Diisi oleh JavaScript -->
+                    </div>
                 </div>
             </div>
-            <div class="cart-footer">
-                <button class="btn checkout-btn">Checkout</button>
-                <button class="btn clear-cart">Kosongkan Keranjang</button>
+            <!-- ===== END TENGAH ===== -->
+
+            <!-- ===== BOTTOM: total + tombol — selalu di bawah, tidak pernah tertutup ===== -->
+            <div class="cart-bottom">
+
+                <div class="cart-total-area">
+                    <!-- Total barang -->
+                    <div class="cart-total-row">
+                        <span>Total Barang</span>
+                        <span class="total-price">Rp 0</span>
+                    </div>
+
+                    <!-- Tombol Pilih Ekspedisi -->
+                    <div id="pilihEkspedisiWrap" style="display:none;">
+                        <button class="btn btn-pilih-ekspedisi" id="btnPilihEkspedisi">
+                            <i class="fas fa-truck"></i>
+                            <span id="btnEkspedisiLabel">Pilih Ekspedisi &amp; Ongkir</span>
+                        </button>
+                    </div>
+
+                    <!-- Ringkasan kurir terpilih -->
+                    <div class="cart-total-row ongkir-row" id="ongkirRow" style="display:none;">
+                        <span>Ongkir <small id="selectedCourierLabel"></small></span>
+                        <span id="ongkirRowAmount" class="ongkir-price-value">Rp 0</span>
+                    </div>
+
+                    <!-- Grand Total -->
+                    <div class="cart-grand-total" id="grandTotalArea" style="display:none;">
+                        <span>Total Bayar</span>
+                        <span id="grandTotalAmount" class="grand-total-value">Rp 0</span>
+                    </div>
+                </div>
+
+                <!-- Tombol aksi -->
+                <div class="cart-footer">
+                    <button class="btn checkout-btn" id="checkoutBtn">
+                        <i class="fas fa-credit-card"></i> Checkout
+                    </button>
+                    <button class="btn clear-cart">
+                        <i class="fas fa-trash"></i> Kosongkan
+                    </button>
+                </div>
+
+            </div>
+            <!-- ===== END BOTTOM ===== -->
+
+        </div>
+    </div>
+    <!-- ===== END KERANJANG BELANJA ===== -->
+
+    <!-- ============================================================
+         BOTTOM SHEET — Pilih Ekspedisi
+         Muncul dari bawah layar, sepenuhnya terpisah dari cart modal
+         ============================================================ -->
+    <div class="shipping-sheet-overlay" id="shippingSheetOverlay">
+        <div class="shipping-sheet" id="shippingSheet">
+
+            <div class="sheet-handle"></div>
+
+            <div class="sheet-header">
+                <h3><i class="fas fa-truck"></i> Pilih Ekspedisi &amp; Ongkir</h3>
+                <button class="sheet-close-btn" id="sheetCloseBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="sheet-body">
+
+                <div class="sheet-search-wrap">
+                    <div class="ongkir-input-wrap">
+                        <i class="fas fa-search ongkir-search-icon"></i>
+                        <input type="text" id="villageSearch" class="ongkir-input"
+                            placeholder="Ketik kelurahan/kota tujuan... (min. 2 huruf)"
+                            autocomplete="off">
+                        <button class="ongkir-clear-btn" id="ongkirClearBtn" style="display:none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <ul class="village-dropdown" id="villageDropdown"></ul>
+                </div>
+
+                <div class="ongkir-loading" id="ongkirLoading" style="display:none;">
+                    <i class="fas fa-spinner fa-spin"></i> Mengambil data ongkir...
+                </div>
+
+                <div class="ongkir-error-msg" id="ongkirErrorMsg" style="display:none;"></div>
+
+                <div id="ongkirResult" style="display:none;">
+                    <p class="ongkir-dest-label" id="ongkirDestLabel"></p>
+                    <p class="ongkir-weight-info" id="ongkirWeightInfo"></p>
+                    <p class="ongkir-catatan" id="ongkirCatatanPengiriman" style="display:none;">
+                        ⚠️ <em>Aktual pengiriman: ditambah 1–2 hari dari waktu yang tertulis di bawah</em>
+                    </p>
+                    <p class="ongkir-pick-hint">Pilih ekspedisi:</p>
+                    <div class="courier-list" id="courierList"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- ===== END BOTTOM SHEET ===== -->
+
+    <!-- Modal Detil Produk -->
+    <div class="spec-modal">
+        <div class="spec-content">
+            <div class="spec-header">
+                <h2><i class="fas fa-tshirt"></i> Detil Produk</h2>
+                <span class="close-spec">&times;</span>
+            </div>
+            <div class="spec-body">
+                <!-- Konten Detil akan diisi oleh JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tentang Kami -->
+    <div class="about-modal">
+        <div class="about-content">
+            <div class="about-header">
+                <h2><i class="fas fa-store"></i> Tentang Kami</h2>
+                <span class="close-about">&times;</span>
+            </div>
+            <div class="about-body">
+                <p><strong>markiel-olshop</strong> <br>toko online yang berdedikasi menghadirkan produk pakaian wanita & pria berkualitas dengan harga terjangkau.</p>
+                <p><strong>markiel-olshop</strong> <br>toko online yang akan membantu anda tampil necis & trendy.</p>
+                <!--<p><strong>markiel-olshop</strong> <br>adalah toko online yang akan menolong anda menyediakan makanan bergizi & berkualitas.</p>-->
+                <p><strong>markiel-olshop</strong> <br>hadir dengan spirit untuk mendukung aktivitas2 anda.</p>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer>
+    <footer id="contact">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>TokoOnline</h3>
+                    <h3>markiel-olshop</h3>
                     <p>Belanja mudah dan nyaman dengan berbagai pilihan produk berkualitas.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Kontak Kami</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Jl. Contoh No. 123, Jakarta</p>
-                    <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
-                    <p><i class="fas fa-envelope"></i> info@tokoonline.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> markiel-olshop </p>
+                    <p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="1.3em" height="1.3em" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:2px;position:relative;top:-1px;font-size:inherit"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>0819-9497-0727 </p>
+                    <p><i class="fas fa-envelope"></i>admin@markiel-olshop.net</p>
                 </div>
                 <div class="footer-section">
                     <h3>Ikuti Kami</h3>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/share/1H7rfVfxbt/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Markiel Kombi"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/markielolshop?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram markiel-olshop"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@markielolshop?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener noreferrer" aria-label="TikTok markielolshop"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 TokoOnline. All rights reserved.</p>
+                <p>&copy; 2026 markiel-olshop. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Lightbox Foto Produk -->
+    <div class="photo-lightbox" id="photoLightbox">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-container">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" alt="Foto produk" class="lightbox-img" id="lightboxImg">
+        </div>
+    </div>
+
+    <!-- ============================================================
+         MODAL PEMBAYARAN — QRIS & Transfer Bank
+         ============================================================ -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-content">
+
+            <div class="payment-header">
+                <h2><i class="fas fa-credit-card"></i> Pembayaran</h2>
+                <span class="close-payment" id="closePayment">&times;</span>
+            </div>
+
+            <div class="payment-body">
+
+                <!-- Ringkasan order -->
+                <div class="payment-summary">
+                    <div class="pay-sum-row">
+                        <span>Total Barang</span>
+                        <span id="payTotalBarang">Rp 0</span>
+                    </div>
+                    <div class="pay-sum-row">
+                        <span id="payOngkirLabel">Ongkir</span>
+                        <span id="payOngkirAmount">Rp 0</span>
+                    </div>
+                    <div class="pay-sum-grand">
+                        <span>Total Bayar</span>
+                        <span id="payGrandTotal">Rp 0</span>
+                    </div>
+                </div>
+
+                <!-- Pilihan metode pembayaran -->
+                <p class="pay-method-title"><i class="fas fa-hand-pointer"></i> Pilih Metode Pembayaran:</p>
+                <div class="pay-method-tabs">
+                    <button class="pay-tab-btn active" id="tabQris" onclick="selectPayMethod('qris')">
+                        <i class="fas fa-qrcode"></i> QRIS
+                    </button>
+                    <button class="pay-tab-btn" id="tabTransfer" onclick="selectPayMethod('transfer')">
+                        <i class="fas fa-university"></i> Transfer Bank
+                    </button>
+                </div>
+
+                <!-- AREA: QRIS -->
+                <div class="pay-area" id="payQrisArea">
+                    <p class="pay-instruction">Scan QR Code berikut menggunakan aplikasi e-wallet (GoPay, OVO, Dana, ShopeePay, dll):</p>
+                    <div class="qris-wrapper">
+                        <img src="qris_markiel.png" alt="QRIS markiel-olshop" class="qris-img"
+                             onerror="this.style.display='none';document.getElementById('qrisPlaceholder').style.display='flex'">
+                        <div id="qrisPlaceholder" class="qris-placeholder" style="display:none;">
+                            <i class="fas fa-qrcode"></i>
+                            <p>Letakkan foto QRIS Anda di folder website<br>dengan nama file: <code>qris_markiel.png</code></p>
+                        </div>
+                    </div>
+                    <p class="pay-note"><i class="fas fa-info-circle"></i> Pastikan nominal yang dibayarkan sesuai dengan <strong>Total Bayar</strong> di atas.</p>
+                </div>
+
+                <!-- AREA: Transfer Bank -->
+                <div class="pay-area" id="payTransferArea" style="display:none;">
+                    <p class="pay-instruction">Transfer ke salah satu rekening berikut, lalu kirim bukti transfer ke WhatsApp kami:</p>
+                    <div class="bank-list" id="bankList"></div>
+                    <p class="pay-note"><i class="fas fa-info-circle"></i> Setelah transfer, kirim bukti pembayaran + nama pemesan ke WhatsApp kami untuk konfirmasi pesanan.</p>
+                </div>
+
+            </div>
+
+            <div class="payment-footer">
+                <button class="btn pay-confirm-btn" id="payConfirmBtn">
+                    <i class="fas fa-check-circle"></i> Konfirmasi Pesanan
+                </button>
+                <button class="btn pay-back-btn" id="payBackBtn">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <!-- ===== END MODAL PEMBAYARAN ===== -->
 
     <script src="script.js"></script>
 </body>

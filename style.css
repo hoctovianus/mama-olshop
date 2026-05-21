@@ -5,11 +5,16 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f9f9f9;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -26,6 +31,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 header .container {
@@ -50,6 +56,7 @@ header .container {
 .logo h1 {
     font-size: 1.5rem;
     color: #2c3e50;
+    transition: color 0.3s;
 }
 
 .navbar {
@@ -113,7 +120,7 @@ header .container {
     transition: 0.3s;
 }
 
-/* Hero Slider Styles - REVISI SMOOTH */
+/* Hero Slider Styles */
 .hero-slider {
     position: relative;
     width: 100%;
@@ -131,7 +138,7 @@ header .container {
     display: flex;
     width: 300%;
     height: 100%;
-    /* transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);*/
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .slide {
@@ -160,29 +167,15 @@ header .container {
     max-width: 600px;
     width: 90%;
     opacity: 0;
-    /* animation: fadeInUp 0.8s ease-out 0.3s forwards; */
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -40%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
+    from { opacity: 0; transform: translate(-50%, -40%); }
+    to   { opacity: 1; transform: translate(-50%, -50%); }
 }
 
-.slide-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-}
-
-.slide-content p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
+.slide-content h2 { font-size: 2.5rem; margin-bottom: 15px; }
+.slide-content p  { font-size: 1.2rem; margin-bottom: 20px; }
 
 .btn {
     display: inline-block;
@@ -192,12 +185,14 @@ header .container {
     border-radius: 5px;
     text-decoration: none;
     font-weight: 600;
-    /* transition: background-color 0.3s; */
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
 }
 
-.btn:hover {
-    background-color: #2980b9;
-}
+.btn:hover { background-color: #2980b9; }
 
 .slider-btn {
     position: absolute;
@@ -210,8 +205,9 @@ header .container {
     border-radius: 50%;
     font-size: 1.2rem;
     cursor: pointer;
-    /* transition: all 0.3s ease; */
+    transition: all 0.3s ease;
     opacity: 0.7;
+    z-index: 10;
 }
 
 .slider-btn:hover {
@@ -220,13 +216,8 @@ header .container {
     transform: translateY(-50%) scale(1.1);
 }
 
-.prev-btn {
-    left: 20px;
-}
-
-.next-btn {
-    right: 20px;
-}
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
 
 .slider-dots {
     position: absolute;
@@ -234,6 +225,7 @@ header .container {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
+    z-index: 10;
 }
 
 .dot {
@@ -243,468 +235,1873 @@ header .container {
     background-color: rgba(255, 255, 255, 0.5);
     margin: 0 5px;
     cursor: pointer;
-    /* transition: all 0.3s ease; */
+    transition: all 0.3s ease;
     position: relative;
 }
 
-.dot.active {
-    background-color: white;
-    transform: scale(1.2);
-}
+.dot:hover { background-color: rgba(255, 255, 255, 0.8); transform: scale(1.1); }
+.dot.active { background-color: white; transform: scale(1.2); }
 
 .dot::after {
     content: '';
     position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
+    top: -4px; left: -4px; right: -4px; bottom: -4px;
     border-radius: 50%;
     border: 2px solid transparent;
-    /* transition: border-color 0.3s ease; */
+    transition: border-color 0.3s ease;
 }
 
-.dot.active::after {
-    border-color: rgba(255, 255, 255, 0.5);
-}
+.dot.active::after { border-color: rgba(255, 255, 255, 0.5); }
 
 /* Products Section */
-.products {
-    padding: 80px 0;
-}
+.products { padding: 36px 0 80px 0; }
 
 .section-title {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 14px;
     font-size: 2.2rem;
     color: #2c3e50;
+    transition: color 0.3s;
 }
 
+/* TAB NAVIGASI */
+.tab-nav { display: flex; gap: 10px; margin-bottom: 0; padding: 0; position: relative; z-index: 1; }
+
+.tab-btn {
+    background: linear-gradient(180deg, #f0f4f8 0%, #dce4ed 100%);
+    border: none; outline: none; cursor: pointer;
+    padding: 15px 24px; font-size: 1rem; font-weight: 700;
+    font-family: inherit; color: #5a6a7a;
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 9px;
+    border-radius: 10px 10px 0 0; position: relative;
+    border-top: 2px solid #ffffff; border-left: 2px solid #dce4ed;
+    border-right: 2px solid #b8c8d8; border-bottom: 3px solid #a8bac8;
+    box-shadow: 0 4px 8px rgba(100,130,160,.18), 0 2px 4px rgba(100,130,160,.12), inset 0 1px 0 rgba(255,255,255,.80);
+    transition: background .22s ease, color .22s ease, transform .15s ease, box-shadow .18s ease, border-bottom-width .12s ease;
+    transform: translateY(2px); letter-spacing: .01em;
+}
+
+.tab-btn i { font-size: 1.05rem; filter: drop-shadow(0 1px 1px rgba(0,0,0,.12)); }
+
+.tab-btn:hover:not(.active) {
+    background: linear-gradient(180deg, #e2eef9 0%, #c8dcee 100%);
+    color: #2475b0; transform: translateY(0px);
+    box-shadow: 0 6px 14px rgba(52,152,219,.22), 0 3px 6px rgba(52,152,219,.14), inset 0 1px 0 rgba(255,255,255,.90);
+    border-bottom-color: #8aaecc;
+}
+
+.tab-btn.active {
+    background: linear-gradient(180deg, #5dade2 0%, #2e86c1 55%, #2475b0 100%);
+    color: #ffffff; transform: translateY(3px);
+    border-top: 2px solid #74bde8; border-left: 2px solid #3498db;
+    border-right: 2px solid #1a6fa8; border-bottom: 2px solid #1a5f96;
+    box-shadow: 0 2px 6px rgba(26,111,168,.35), 0 1px 2px rgba(26,111,168,.25), inset 0 1px 0 rgba(255,255,255,.25), inset 0 -2px 4px rgba(0,0,0,.12);
+    text-shadow: 0 1px 2px rgba(0,0,0,.18); z-index: 2;
+}
+
+.tab-btn.active i { filter: drop-shadow(0 1px 2px rgba(0,0,0,.22)); }
+
+.tab-nav-floor {
+    height: 4px;
+    background: linear-gradient(90deg, #2e86c1 0%, #3498db 50%, #2e86c1 100%);
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 2px 6px rgba(52,152,219,.30);
+    margin-bottom: 0;
+}
+
+.tab-content {
+    display: none;
+    border: 2px solid #d0dce8;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 30px 0 0 0;
+    margin-bottom: 0;
+    box-shadow: 0 6px 20px rgba(52,100,150,.10), 0 2px 6px rgba(52,100,150,.07), inset 0 1px 0 rgba(255,255,255,.50);
+}
+
+.tab-content.active { display: block; }
+
+/* Dark mode tabs */
+body.dark .tab-btn { background: linear-gradient(180deg, #2a2a40 0%, #1a1a2c 100%); color: #8090a8; border-top: 2px solid #3a3a54; border-left: 2px solid #2e2e44; border-right: 2px solid #141420; border-bottom: 3px solid #0e0e1a; box-shadow: 0 4px 10px rgba(0,0,0,.35), 0 2px 4px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06); }
+body.dark .tab-btn:hover:not(.active) { background: linear-gradient(180deg, #303050 0%, #22223a 100%); color: #62b8e8; box-shadow: 0 6px 14px rgba(0,0,0,.40), 0 3px 6px rgba(52,152,219,.18), inset 0 1px 0 rgba(255,255,255,.08); }
+body.dark .tab-btn.active { background: linear-gradient(180deg, #4aa8e0 0%, #2475b0 55%, #1a5f96 100%); color: #ffffff; border-top: 2px solid #5ab8f0; border-left: 2px solid #2e86c1; border-right: 2px solid #1060a0; border-bottom: 2px solid #0e4a80; box-shadow: 0 2px 6px rgba(0,0,0,.50), inset 0 1px 0 rgba(255,255,255,.18), inset 0 -2px 4px rgba(0,0,0,.20); }
+body.dark .tab-nav-floor { background: linear-gradient(90deg, #1a5f96 0%, #2475b0 50%, #1a5f96 100%); box-shadow: 0 2px 8px rgba(52,152,219,.25); }
+body.dark .tab-content { border-color: #2a2a3e; box-shadow: 0 6px 20px rgba(0,0,0,.30), 0 2px 6px rgba(0,0,0,.20); }
+
+/* Product Grid */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
+    padding: 0 0 30px 0;
 }
 
 .product-card {
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 6px 12px rgba(0,0,0,.10), 0 12px 24px rgba(0,0,0,.07), 4px 8px 16px rgba(0,0,0,.06), -2px 4px 8px rgba(0,0,0,.04);
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
 }
 
 .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-7px);
+    box-shadow: 0 4px 8px rgba(0,0,0,.10), 0 12px 24px rgba(0,0,0,.13), 0 24px 40px rgba(0,0,0,.09), 6px 14px 24px rgba(0,0,0,.08), -3px 6px 12px rgba(0,0,0,.05);
 }
 
-.product-image {
-    height: 200px;
-    overflow: hidden;
-}
+.product-image { height: 200px; overflow: hidden; }
 
 .product-image img {
+    width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;
+}
+
+.product-card:hover .product-image img { transform: scale(1.05); }
+
+.product-info { padding: 20px; }
+.product-name { font-size: 1.3rem; margin-bottom: 10px; color: #2c3e50; transition: color 0.3s; }
+.product-description { color: #7f8c8d; margin-bottom: 15px; font-size: 0.9rem; transition: color 0.3s; }
+.product-price { font-size: 1.2rem; font-weight: 700; color: #e74c3c; margin-bottom: 15px; }
+
+/* ================================================================
+   TOMBOL "Lihat Detil" & "Tambah ke Keranjang" pada PRODUCT CARD
+   ----------------------------------------------------------------
+   Style EMBOSSED (menonjol) — disamakan dgn tombol .music-toggle,
+   NAMUN tetap berbentuk KOTAK dgn sudut rounded proporsional
+   (bukan oval). Ukuran (lebar 100% & padding 12px) dipertahankan
+   SAMA persis spt versi sebelumnya.
+   ================================================================ */
+
+/* Tombol Lihat Spesifikasi — BIRU embossed (selaras .music-toggle) */
+.view-spec {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-}
-
-.product-card:hover .product-image img {
-    transform: scale(1.05);
-}
-
-.product-info {
-    padding: 20px;
-}
-
-.product-name {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: #2c3e50;
-}
-
-.product-description {
-    color: #7f8c8d;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-}
-
-.product-price {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #e74c3c;
-    margin-bottom: 15px;
-}
-
-.add-to-cart {
-    width: 100%;
-    background-color: #2ecc71;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
+    padding: 12px;
+    border-radius: 10px;                /* rounded proporsional, bukan oval */
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 10px;
+
+    /* Font */
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.40);
+
+    /* EMBOSSED look — gradient atas-terang ke bawah-gelap (biru) */
+    background: linear-gradient(180deg, #5dade2 0%, #3498db 55%, #2874a6 100%);
+    border-top:    1.5px solid #7fbfe8;   /* highlight atas */
+    border-left:   1.5px solid #4ea8db;
+    border-right:  1.5px solid #1f5e87;   /* shadow kanan */
+    border-bottom: 2px   solid #154565;   /* shadow bawah (lebih gelap) */
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.30),
+        0 2px 4px  rgba(0,0,0,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.2s ease;
+}
+.view-spec:hover {
+    filter: brightness(1.07);
+    box-shadow:
+        0 6px 14px rgba(0,0,0,0.35),
+        0 3px 6px  rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.40),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+}
+.view-spec:active {
+    transform: translateY(1px);
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.30),
+        0 1px 2px rgba(0,0,0,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 2px 4px rgba(0,0,0,0.25);
 }
 
+/* Tombol Tambah ke Keranjang — HIJAU embossed (struktur sama dgn .view-spec) */
+.add-to-cart {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 10px;                /* rounded proporsional, bukan oval */
+    cursor: pointer;
+    user-select: none;
+
+    /* Font */
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.40);
+
+    /* EMBOSSED look — gradient atas-terang ke bawah-gelap (hijau) */
+    background: linear-gradient(180deg, #58d68d 0%, #2ecc71 55%, #1e8449 100%);
+    border-top:    1.5px solid #82e0aa;   /* highlight atas */
+    border-left:   1.5px solid #5cd887;
+    border-right:  1.5px solid #1d8348;   /* shadow kanan */
+    border-bottom: 2px   solid #145a32;   /* shadow bawah (lebih gelap) */
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.30),
+        0 2px 4px  rgba(0,0,0,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.2s ease;
+}
 .add-to-cart:hover {
-    background-color: #27ae60;
+    filter: brightness(1.07);
+    box-shadow:
+        0 6px 14px rgba(0,0,0,0.35),
+        0 3px 6px  rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.40),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+}
+.add-to-cart:active {
+    transform: translateY(1px);
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.30),
+        0 1px 2px rgba(0,0,0,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 2px 4px rgba(0,0,0,0.25);
 }
 
-/* Cart Modal */
+/* Dark mode — gradien sedikit lebih gelap (selaras .music-toggle dark) */
+body.dark .view-spec {
+    background: linear-gradient(180deg, #4aa8e0 0%, #2475b0 55%, #1a5f96 100%);
+    border-top:    1.5px solid #5ab8f0;
+    border-left:   1.5px solid #2e86c1;
+    border-right:  1.5px solid #1060a0;
+    border-bottom: 2px   solid #0e4a80;
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.45),
+        0 2px 4px  rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 -2px 4px rgba(0,0,0,0.20);
+}
+body.dark .add-to-cart {
+    background: linear-gradient(180deg, #45c280 0%, #1e8c4f 55%, #146a3a 100%);
+    border-top:    1.5px solid #58d68d;
+    border-left:   1.5px solid #239b5e;
+    border-right:  1.5px solid #126a3a;
+    border-bottom: 2px   solid #0a4a28;
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.45),
+        0 2px 4px  rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 -2px 4px rgba(0,0,0,0.20);
+}
+
+/* Modal Tentang Kami */
+.about-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); z-index: 1100; justify-content: center; align-items: center; }
+.about-content { background-color: white; width: 90%; max-width: 600px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,.2); transition: background-color 0.3s; }
+.about-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; background-color: #2c3e50; color: white; }
+.about-header h2 { margin: 0; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+.close-about { font-size: 1.5rem; cursor: pointer; }
+.about-body { padding: 20px; max-height: 400px; overflow-y: auto; font-size: 0.95rem; color: #444; line-height: 1.7; transition: color 0.3s, background-color 0.3s; }
+.about-body p { margin-bottom: 14px; }
+.about-body p:last-child { margin-bottom: 0; }
+
+/* ============================================================
+   CART MODAL — Redesign dengan layout baru untuk ongkir
+   ============================================================ */
 .cart-modal {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1100;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;   /* muncul dari bawah layar */
 }
 
 .cart-content {
     background-color: white;
-    width: 90%;
+    width: 100%;
     max-width: 600px;
-    border-radius: 10px;
+    border-radius: 20px 20px 0 0;   /* sudut atas membulat */
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -6px 30px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    height: 92vh;            /* hampir penuh layar */
+    max-height: 92vh;
+    transition: background-color 0.3s;
 }
 
 .cart-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 16px 20px;
     background-color: #2c3e50;
     color: white;
+    flex-shrink: 0;          /* header selalu terlihat */
 }
 
 .cart-header h2 {
     margin: 0;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.close-cart {
-    font-size: 1.5rem;
-    cursor: pointer;
-}
+.close-cart { font-size: 1.5rem; cursor: pointer; line-height: 1; }
+.close-cart:hover { opacity: 0.7; }
 
-.cart-body {
-    padding: 20px;
-    max-height: 400px;
+/* ── TENGAH: HANYA daftar item, scrollable ── */
+.cart-middle {
+    flex: 1;               /* ambil semua ruang sisa di antara header dan cart-bottom */
     overflow-y: auto;
+    min-height: 0;         /* wajib agar flex child bisa scroll */
 }
 
-.cart-item {
+.cart-items-scroll {
+    padding: 12px 20px;
+}
+
+/* ── BOTTOM: total + tombol — tidak pernah terpotong ── */
+.cart-bottom {
+    flex-shrink: 0;        /* tidak boleh tertekan */
+    background: white;
+    border-top: 2px solid #e8eef4;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+/* ============================================================
+   ONGKIR SECTION — Fitur Cek Ongkir Real-Time
+   ============================================================ */
+.ongkir-section {
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #f0f8ff 0%, #e8f4fd 100%);
+    border-bottom: 1px solid #c8e0f4;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.ongkir-section-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
+    gap: 8px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1a6fa8;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #c8e0f4;
 }
 
-.cart-item:last-child {
-    border-bottom: none;
+.ongkir-section-header i {
+    font-size: 1rem;
+    color: #3498db;
 }
 
-.cart-item-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.cart-item-image {
-    width: 60px;
-    height: 60px;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.cart-item-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.cart-item-details h4 {
-    margin-bottom: 5px;
-}
-
-.cart-item-price {
-    color: #e74c3c;
+/* Input area */
+.ongkir-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 6px;
     font-weight: 600;
 }
 
-.cart-item-controls {
+.ongkir-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ongkir-search-icon {
+    position: absolute;
+    left: 10px;
+    color: #95a5a6;
+    font-size: 0.85rem;
+    pointer-events: none;
+}
+
+.ongkir-input {
+    width: 100%;
+    padding: 9px 36px 9px 32px;
+    border: 1.5px solid #cde;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-family: inherit;
+    color: #333;
+    background: white;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ongkir-input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+}
+
+.ongkir-clear-btn {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #95a5a6;
+    cursor: pointer;
+    font-size: 0.85rem;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: color 0.2s, background 0.2s;
+}
+
+.ongkir-clear-btn:hover {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+}
+
+/* Wrapper — untuk posisioning dropdown */
+.ongkir-search-wrapper {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+/* Dropdown hasil pencarian kelurahan */
+.village-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1.5px solid #c8e0f4;
+    border-radius: 8px;
+    max-height: 190px;
+    overflow-y: auto;
+    z-index: 9999;
+    list-style: none;
+    box-shadow: 0 6px 20px rgba(0, 80, 160, 0.12);
+    display: none;
+}
+
+.village-dropdown-item {
+    padding: 9px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.15s;
+}
+
+.village-dropdown-item:last-child { border-bottom: none; }
+
+.village-dropdown-item:hover {
+    background: #eaf4fb;
+}
+
+.village-dropdown-item .village-name {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.village-dropdown-item .village-detail {
+    display: block;
+    font-size: 0.75rem;
+    color: #7f8c8d;
+    margin-top: 1px;
+}
+
+.village-dropdown-empty {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+    color: #999;
+    text-align: center;
+    list-style: none;
+}
+
+/* Loading & error */
+.ongkir-loading {
+    font-size: 0.85rem;
+    color: #3498db;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.ongkir-error-msg {
+    font-size: 0.83rem;
+    color: #c0392b;
+    background: #fdf0ee;
+    border: 1px solid #f5c6c0;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-top: 6px;
+}
+
+/* Hasil ongkir */
+.ongkir-result { margin-top: 6px; }
+
+.ongkir-dest-label {
+    font-size: 0.82rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.ongkir-weight-info {
+    font-size: 0.78rem;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+}
+
+.ongkir-pick-hint {
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+/* Catatan aktual pengiriman */
+.ongkir-catatan {
+    font-size: 0.78rem;
+    color: #b7770d;
+    background: #fff8e1;
+    border-left: 3px solid #f39c12;
+    border-radius: 0 5px 5px 0;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+body.dark .ongkir-catatan {
+    color: #e0b060;
+    background: #2a2010;
+    border-left-color: #c87f0a;
+}
+
+/* Daftar kurir */
+.courier-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-right: 2px;
+}
+
+.courier-item {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 9px 12px;
+    border: 1.5px solid #dce8f4;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+    user-select: none;
+}
+
+.courier-item:hover {
+    background: #eaf4fb;
+    border-color: #3498db;
+}
+
+.courier-item.courier-selected {
+    background: #e8f4ff;
+    border-color: #2980b9;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+}
+
+.courier-item input[type="radio"] {
+    accent-color: #2980b9;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.courier-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.courier-name {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #2c3e50;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.courier-etd {
+    display: block;
+    font-size: 0.72rem;
+    color: #7f8c8d;
+    margin-top: 1px;
+}
+
+.courier-price {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #e74c3c;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   AREA TOTAL — Harga barang, ongkir, grand total
+   ============================================================ */
+.cart-total-area {
+    padding: 12px 20px 8px;
+    background: #f8fafc;
+    transition: background 0.3s;
+}
+
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 6px;
+    transition: color 0.3s;
+}
+
+.cart-total-row:last-child { margin-bottom: 0; }
+
+.total-price {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.ongkir-row {
+    display: none; /* muncul setelah kurir dipilih */
+}
+
+.ongkir-row small {
+    font-size: 0.75rem;
+    color: #95a5a6;
+    margin-left: 4px;
+}
+
+.ongkir-price-value {
+    font-weight: 700;
+    color: #27ae60;
+}
+
+/* Grand total */
+.cart-grand-total {
+    display: none; /* muncul setelah kurir dipilih */
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #d0dce8;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #2c3e50;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.grand-total-value {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #e74c3c;
+}
+
+/* Cart footer — di dalam cart-bottom */
+.cart-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 20px 16px;
+    background: white;
+    transition: background 0.3s;
+}
+
+.checkout-btn { background-color: #3498db; display: flex; align-items: center; gap: 7px; }
+.checkout-btn:hover { background-color: #2980b9; }
+
+.clear-cart { background-color: #95a5a6; display: flex; align-items: center; gap: 7px; }
+.clear-cart:hover { background-color: #7f8c8d; }
+
+/* Item kosong */
+.empty-cart {
+    text-align: center;
+    color: #bbb;
+    font-size: 0.9rem;
+    padding: 20px 0;
+}
+
+/* ============================================================
+   CART ITEM — layout 2 kolom
+   ============================================================ */
+.cart-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    align-items: stretch;
+    transition: border-color 0.3s;
+}
+
+.cart-item:last-child { border-bottom: none; }
+
+.cart-item-image {
+    width: 80px; min-height: 80px;
+    border-radius: 8px; overflow: hidden;
+}
+
+.cart-item-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.cart-item-right {
+    display: flex; flex-direction: column;
+    justify-content: space-between; gap: 5px;
+}
+
+.cart-item-name {
+    font-size: 0.9rem; font-weight: 600; color: #2c3e50;
+    line-height: 1.35; margin: 0; transition: color 0.3s;
+}
+
+.cart-item-controls {
+    display: flex; align-items: center; gap: 7px; flex-wrap: nowrap;
 }
 
 .quantity-btn {
-    background-color: #f1f1f1;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
+    background-color: #f1f1f1; border: none; width: 30px; height: 30px;
+    border-radius: 50%; cursor: pointer; display: flex; justify-content: center;
+    align-items: center; font-size: 1rem; font-weight: 600; flex-shrink: 0;
+    transition: background-color 0.2s;
+}
+.quantity-btn:hover { background-color: #dde; }
+
+.quantity { font-weight: 700; min-width: 22px; text-align: center; font-size: 0.95rem; }
+
+.remove-item {
+    background-color: #e74c3c; color: white; border: none;
+    padding: 5px 12px; border-radius: 5px; cursor: pointer;
+    font-size: 0.8rem; font-weight: 600; transition: background-color 0.2s; white-space: nowrap;
+}
+.remove-item:hover { background-color: #c0392b; }
+
+.cart-item-price { color: #e74c3c; font-weight: 700; font-size: 0.95rem; }
+
+/* ============================================================
+   MODAL SPESIFIKASI PRODUK
+   ============================================================ */
+.spec-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.5); z-index: 1100; justify-content: center; align-items: center; }
+.spec-content { background-color: white; width: 90%; max-width: 600px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,.2); max-height: 90vh; display: flex; flex-direction: column; transition: background-color 0.3s; }
+.spec-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; background-color: #2c3e50; color: white; flex-shrink: 0; }
+.spec-header h2 { margin: 0; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+.close-spec { font-size: 1.5rem; cursor: pointer; line-height: 1; transition: opacity 0.2s; }
+.close-spec:hover { opacity: 0.7; }
+.spec-body { padding: 20px; overflow-y: auto; flex: 1; }
+.spec-product-header { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid #f0f0f0; transition: border-color 0.3s; }
+.spec-product-img { width: 90px; height: 90px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+.spec-product-img img { width: 100%; height: 100%; object-fit: cover; }
+.spec-product-title h3 { font-size: 1.15rem; color: #2c3e50; margin-bottom: 6px; transition: color 0.3s; }
+.spec-keterangan { font-size: 0.85rem; color: #7f8c8d; line-height: 1.5; transition: color 0.3s; }
+.spec-section-photos { margin-bottom: 20px; }
+.spec-photo-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; }
+.spec-photo-item { border-radius: 8px; overflow: hidden; aspect-ratio: 4 / 3; background-color: #f0f0f0; cursor: pointer; transition: background-color 0.3s; }
+.spec-photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+.spec-photo-item:hover img { transform: scale(1.04); }
+.spec-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.spec-detail-item { background-color: #f8f9fa; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; transition: background-color 0.3s; }
+.spec-label { font-size: 0.75rem; color: #95a5a6; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 5px; transition: color 0.3s; }
+.spec-label i { color: #3498db; }
+.spec-value { font-size: 0.9rem; font-weight: 600; color: #2c3e50; transition: color 0.3s; }
+.spec-section { margin-bottom: 20px; }
+.spec-section h4 { font-size: 0.95rem; color: #2c3e50; margin-bottom: 10px; display: flex; align-items: center; gap: 7px; padding-bottom: 6px; border-bottom: 1px solid #eee; transition: color 0.3s, border-color 0.3s; }
+.spec-section h4 i { color: #3498db; }
+.spec-colors { display: flex; flex-wrap: wrap; gap: 14px; padding: 4px 2px; }
+.spec-color-swatch { display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: default; }
+.spec-color-circle { width: 36px; height: 36px; border-radius: 50%; border-style: solid; border-width: 2px; box-shadow: 0 2px 6px rgba(0,0,0,.18); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.spec-color-swatch:hover .spec-color-circle { transform: scale(1.18); box-shadow: 0 4px 10px rgba(0,0,0,.25); }
+.spec-color-name { font-size: 0.7rem; color: #555; text-align: center; max-width: 52px; line-height: 1.2; word-break: break-word; transition: color 0.3s; }
+.spec-table-wrapper { overflow-x: auto; border-radius: 8px; border: 1px solid #e0e0e0; margin-bottom: 8px; transition: border-color 0.3s; }
+.spec-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.spec-table thead tr { background-color: #2c3e50; color: white; }
+.spec-table th { padding: 10px 12px; text-align: center; font-weight: 600; white-space: nowrap; }
+.spec-table td { padding: 9px 12px; text-align: center; border-bottom: 1px solid #f0f0f0; color: #444; transition: color 0.3s, border-color 0.3s; }
+.spec-table tbody tr:last-child td { border-bottom: none; }
+.spec-table tbody tr:nth-child(even) { background-color: #f8f9fa; transition: background-color 0.3s; }
+.spec-table tbody tr:hover { background-color: #eaf4fb; }
+.spec-size-note { font-size: 0.78rem; color: #95a5a6; display: flex; align-items: flex-start; gap: 5px; transition: color 0.3s; }
+.spec-size-note i { color: #3498db; margin-top: 2px; flex-shrink: 0; }
+.spec-perawatan { font-size: 0.88rem; color: #555; line-height: 1.7; background-color: #fdf9ec; border-left: 3px solid #f39c12; padding: 10px 14px; border-radius: 0 6px 6px 0; transition: background-color 0.3s, color 0.3s; }
+
+/* Footer */
+footer { background-color: #2c3e50; color: white; padding: 50px 0 20px; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 30px; }
+.footer-section h3 { margin-bottom: 20px; font-size: 1.3rem; }
+.footer-section p { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+.social-links { display: flex; gap: 15px; }
+.social-links a { color: white; font-size: 1.5rem; transition: color 0.3s; }
+.social-links a:hover { color: #3498db; }
+.footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.1); }
+
+/* Notification */
+.notification {
+    position: fixed; top: 20px; right: 20px;
+    background-color: #2ecc71; color: white;
+    padding: 10px 16px; border-radius: 5px; z-index: 1200;
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    animation: slideIn 0.3s ease-out;
+    font-size: 0.82rem; max-width: 260px; line-height: 1.4;
+}
+
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.photo-lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1300; justify-content: center; align-items: flex-start; overflow-y: auto; padding: 20px 0; }
+.photo-lightbox.active { display: flex; }
+.lightbox-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,.88); z-index: 0; }
+.lightbox-container { position: relative; width: 90%; max-width: 600px; margin: auto; z-index: 1; border-radius: 10px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,.6); animation: lightboxFadeIn 0.25s ease; }
+@keyframes lightboxFadeIn { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+.lightbox-img { width: 100%; height: auto; display: block; }
+.lightbox-close { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; background-color: rgba(0,0,0,.65); color: white; border: none; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; justify-content: center; align-items: center; z-index: 2; transition: background-color 0.2s; }
+.lightbox-close:hover { background-color: rgba(231,76,60,.9); }
+
+/* ============================================================
+   DARK MODE TOGGLE
+   ============================================================ */
+.dark-mode-toggle { display: flex; align-items: center; gap: 6px; margin-left: 20px; cursor: pointer; user-select: none; flex-shrink: 0; }
+.toggle-icon-sun { color: #f39c12; font-size: 0.9rem; transition: color 0.3s, opacity 0.3s; }
+.toggle-icon-moon { color: #95a5a6; font-size: 0.85rem; transition: color 0.3s, opacity 0.3s; }
+.toggle-switch { width: 44px; height: 24px; background-color: #ccc; border-radius: 12px; position: relative; transition: background-color 0.3s; flex-shrink: 0; box-shadow: inset 0 1px 3px rgba(0,0,0,.2); }
+.toggle-knob { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background-color: white; border-radius: 50%; transition: transform 0.3s ease; box-shadow: 0 1px 4px rgba(0,0,0,.3); }
+
+/* ============================================================
+   DARK MODE — semua override
+   ============================================================ */
+body.dark { background-color: #121218; color: #d0d0d0; }
+body.dark header { background-color: #1a1a28; box-shadow: 0 2px 10px rgba(0,0,0,.4); }
+body.dark .logo h1 { color: #e0e0e0; }
+body.dark .nav-menu a { color: #c0c0c0; }
+body.dark .nav-menu a:hover { color: #3498db; }
+body.dark .cart-icon { color: #d0d0d0; }
+body.dark .bar { background-color: #c0c0c0; }
+body.dark .toggle-switch { background-color: #3498db; }
+body.dark .toggle-knob { transform: translateX(20px); }
+body.dark .toggle-icon-sun { color: #7f8c8d; opacity: 0.6; }
+body.dark .toggle-icon-moon { color: #3498db; opacity: 1; }
+body.dark .products { background-color: #121218; }
+body.dark .section-title { color: #e0e0e0; }
+body.dark .product-card { background-color: #1e1e2e; box-shadow: 0 2px 4px rgba(0,0,0,.3), 0 6px 12px rgba(0,0,0,.35), 0 12px 24px rgba(0,0,0,.25); }
+body.dark .product-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,.4), 0 12px 24px rgba(0,0,0,.45), 0 24px 40px rgba(0,0,0,.35); }
+body.dark .product-name { color: #e0e0e0; }
+body.dark .product-description { color: #9a9a9a; }
+body.dark .nav-menu { background-color: #1a1a28; }
+body.dark .nav-menu li { border-bottom-color: #2e2e3e; }
+body.dark .cart-content, body.dark .spec-content, body.dark .about-content { background-color: #1e1e2e; }
+body.dark .cart-middle { background-color: #1e1e2e; }
+body.dark .cart-header { background-color: #16213e; }
+body.dark .cart-items-scroll { border-bottom-color: #2e2e3e; }
+body.dark .about-body { color: #c8c8c8; background-color: #1e1e2e; }
+body.dark .cart-item { border-bottom-color: #2e2e3e; }
+body.dark .cart-item-name { color: #e0e0e0; }
+body.dark .quantity-btn { background-color: #2e2e3e; color: #d0d0d0; }
+body.dark .quantity-btn:hover { background-color: #3a3a50; }
+body.dark .quantity { color: #e0e0e0; }
+body.dark .empty-cart { color: #666; }
+
+/* Ongkir section dark mode */
+body.dark .ongkir-section {
+    background: linear-gradient(135deg, #1a253a 0%, #152035 100%);
+    border-bottom-color: #243050;
+}
+body.dark .ongkir-section-header { color: #62b8e8; border-bottom-color: #243050; }
+body.dark .ongkir-label { color: #aaa; }
+body.dark .ongkir-input {
+    background: #1e1e2e;
+    border-color: #3a4a6a;
+    color: #d0d0d0;
+}
+body.dark .ongkir-input:focus { border-color: #3498db; box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); }
+body.dark .ongkir-input::placeholder { color: #666; }
+body.dark .ongkir-clear-btn { color: #666; }
+body.dark .ongkir-clear-btn:hover { color: #e74c3c; background: rgba(231,76,60,.15); }
+body.dark .ongkir-search-icon { color: #555; }
+body.dark .village-dropdown { background: #1e1e2e; border-color: #3a4a6a; box-shadow: 0 6px 20px rgba(0,0,0,.4); }
+body.dark .village-dropdown-item { border-bottom-color: #2a2a3a; }
+body.dark .village-dropdown-item:hover { background: #252540; }
+body.dark .village-dropdown-item .village-name { color: #e0e0e0; }
+body.dark .village-dropdown-item .village-detail { color: #7a8a9a; }
+body.dark .village-dropdown-empty { color: #666; }
+body.dark .ongkir-loading { color: #5aacdf; }
+body.dark .ongkir-error-msg { color: #e08080; background: #2a1a1a; border-color: #4a2a2a; }
+body.dark .ongkir-dest-label { color: #d0d0d0; }
+body.dark .ongkir-weight-info { color: #7a8a9a; }
+body.dark .ongkir-pick-hint { color: #aaa; }
+body.dark .courier-item { background: #1e2a3a; border-color: #2e3e5a; }
+body.dark .courier-item:hover { background: #253050; border-color: #3498db; }
+body.dark .courier-item.courier-selected { background: #1e3050; border-color: #2980b9; box-shadow: 0 0 0 2px rgba(52,152,219,.3); }
+body.dark .courier-name { color: #d8d8d8; }
+body.dark .courier-etd { color: #7a8a9a; }
+
+/* Cart total dark mode */
+body.dark .cart-total-area { background: #181828; }
+body.dark .cart-bottom { background: #1a1a28; border-top-color: #2e2e3e; }
+body.dark .cart-total-row { color: #b0b0b0; }
+body.dark .total-price { color: #d8d8d8; }
+body.dark .ongkir-price-value { color: #4abe80; }
+body.dark .cart-grand-total { border-top-color: #2e3e5a; color: #d8d8d8; }
+body.dark .grand-total-value { color: #e07070; }
+
+/* Cart footer dark mode */
+body.dark .cart-footer { background: #1a1a28; }
+
+/* Spec modal dark mode */
+body.dark .spec-body { color: #c8c8c8; }
+body.dark .spec-product-header { border-bottom-color: #2e2e3e; }
+body.dark .spec-product-title h3 { color: #e0e0e0; }
+body.dark .spec-keterangan { color: #9a9a9a; }
+body.dark .spec-detail-item { background-color: #252535; }
+body.dark .spec-label { color: #7a8a8a; }
+body.dark .spec-value { color: #e0e0e0; }
+body.dark .spec-section h4 { color: #e0e0e0; border-bottom-color: #2e2e3e; }
+body.dark .spec-color-name { color: #aaa; }
+body.dark .spec-table-wrapper { border-color: #2e2e3e; }
+body.dark .spec-table td { color: #c0c0c0; border-bottom-color: #2a2a3a; }
+body.dark .spec-table tbody tr:nth-child(even) { background-color: #252535; }
+body.dark .spec-table tbody tr:hover { background-color: #2a3050; }
+body.dark .spec-size-note { color: #7a8a8a; }
+body.dark .spec-perawatan { background-color: #252218; color: #b8b098; border-left-color: #c0870a; }
+body.dark .spec-photo-item { background-color: #252535; }
+body.dark footer { background-color: #111120; }
+body.dark .footer-bottom { border-top-color: rgba(255,255,255,.08); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 992px) {
+    .slide-content h2 { font-size: 2rem; }
+    .slide-content p  { font-size: 1rem; }
+}
+
+@media (max-width: 768px) {
+    .navbar { position: relative; }
+    header .container { padding: 12px 15px; }
+    .logo { min-width: 0; overflow: hidden; flex-shrink: 1; max-width: calc(100% - 128px); }
+    .logo img { width: 32px; height: 32px; margin-right: 7px; }
+    .logo h1 { font-size: 0.92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .hamburger { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); z-index: 1001; display: flex; }
+    .bar { width: 21px; height: 2px; margin: 3px 0; }
+    .cart-icon { position: absolute; right: 44px; top: 50%; transform: translateY(-50%); margin-left: 0; z-index: 1001; font-size: 1.05rem; }
+    .dark-mode-toggle { position: absolute; right: 78px; top: 50%; transform: translateY(-50%); margin-left: 0; z-index: 1001; }
+    .dark-mode-toggle .toggle-icon-sun, .dark-mode-toggle .toggle-icon-moon { display: none; }
+    .toggle-switch { width: 36px; height: 20px; border-radius: 10px; }
+    .toggle-knob { width: 14px; height: 14px; top: 3px; left: 3px; }
+    body.dark .toggle-knob { transform: translateX(16px); }
+
+    .nav-menu { position: fixed; top: 70px; left: -100%; flex-direction: column; background-color: white; width: 100%; text-align: center; transition: 0.3s; box-shadow: 0 10px 10px rgba(0,0,0,.1); z-index: 999; }
+    .nav-menu.active { left: 0; }
+    .nav-menu li { margin: 0; padding: 15px 0; border-bottom: 1px solid #eee; }
+
+    .slide-content { padding: 14px 16px; width: 65%; max-width: 260px; border-radius: 8px; }
+    .slide-content h2 { font-size: 1.5rem; }
+
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-content { grid-template-columns: 1fr; }
+
+    .cart-footer { flex-direction: column; gap: 8px; }
+    .cart-footer .btn { width: 100%; justify-content: center; }
+
+    .spec-product-header { flex-direction: column; }
+    .spec-product-img { width: 100%; height: 160px; }
+    .spec-details-grid { grid-template-columns: 1fr 1fr; }
+
+    /* Ongkir di mobile */
+    .courier-list { max-height: 130px; }
+    .cart-items-scroll { max-height: 160px; }
+}
+
+@media (max-width: 576px) {
+    .logo h1 { font-size: 0.88rem; }
+    .slide-content { padding: 10px 12px; width: 58%; max-width: 230px; }
+    .slide-content h2 { font-size: 1.1rem; }
+    .slide-content p  { font-size: 0.85rem; margin-bottom: 12px; }
+    .product-grid { grid-template-columns: 1fr; }
+    .slider-btn { width: 40px; height: 40px; font-size: 1rem; }
+    .cart-content { width: 97%; }
+    .spec-content { width: 97%; }
+    .spec-details-grid { grid-template-columns: 1fr; }
+    .spec-photo-grid { gap: 6px; }
+    .spec-color-circle { width: 30px; height: 30px; }
+    .spec-color-name { font-size: 0.65rem; max-width: 44px; }
+    .notification { font-size: 0.75rem; padding: 8px 13px; max-width: 210px; top: 14px; right: 12px; }
+}
+
+/* ============================================================
+   MODAL PEMBAYARAN — QRIS & Transfer Bank
+   ============================================================ */
+.payment-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1200;
     justify-content: center;
     align-items: center;
 }
 
-.quantity {
-    font-weight: 600;
-    min-width: 30px;
-    text-align: center;
+.payment-content {
+    background: white;
+    width: 90%;
+    max-width: 540px;
+    max-height: 92vh;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
 }
 
-.remove-item {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 0.8rem;
-}
-
-.cart-total {
-    padding: 20px;
-    border-top: 1px solid #eee;
-    text-align: right;
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-.total-price {
-    color: #e74c3c;
-}
-
-.cart-footer {
+.payment-header {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    border-top: 1px solid #eee;
-}
-
-.checkout-btn {
-    background-color: #3498db;
-}
-
-.clear-cart {
-    background-color: #95a5a6;
-}
-
-.clear-cart:hover {
-    background-color: #7f8c8d;
-}
-
-/* Footer Styles */
-footer {
-    background-color: #2c3e50;
+    align-items: center;
+    padding: 16px 22px;
+    background: linear-gradient(135deg, #1a6fa8 0%, #2c3e50 100%);
     color: white;
-    padding: 50px 0 20px;
+    flex-shrink: 0;
 }
 
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 30px;
+.payment-header h2 {
+    margin: 0;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 9px;
 }
 
-.footer-section h3 {
-    margin-bottom: 20px;
-    font-size: 1.3rem;
+.close-payment {
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    line-height: 1;
+}
+.close-payment:hover { opacity: 1; }
+
+.payment-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 22px;
+    min-height: 0;
 }
 
-.footer-section p {
+/* Ringkasan harga */
+.payment-summary {
+    background: #f0f7ff;
+    border: 1.5px solid #c8e0f4;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+}
+
+.pay-sum-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.92rem;
+    color: #555;
+    margin-bottom: 7px;
+}
+
+.pay-sum-grand {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #2c3e50;
+    padding-top: 10px;
+    margin-top: 6px;
+    border-top: 2px solid #2980b9;
+}
+
+.pay-sum-grand span:last-child { color: #e74c3c; font-size: 1.2rem; }
+
+/* Tab metode pembayaran */
+.pay-method-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #2c3e50;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
 }
 
-.social-links {
+.pay-method-tabs {
     display: flex;
-    gap: 15px;
+    gap: 10px;
+    margin-bottom: 16px;
 }
 
-.social-links a {
+.pay-tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #dde;
+    background: #f8f8f8;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 600;
+    font-family: inherit;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: all 0.2s;
+}
+
+.pay-tab-btn:hover { border-color: #3498db; color: #3498db; background: #eaf4fb; }
+
+.pay-tab-btn.active {
+    border-color: #2980b9;
+    background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
-    font-size: 1.5rem;
-    transition: color 0.3s;
+    box-shadow: 0 3px 10px rgba(52, 152, 219, 0.35);
 }
 
-.social-links a:hover {
-    color: #3498db;
+.pay-area { animation: fadeIn 0.2s ease; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-.footer-bottom {
+.pay-instruction {
+    font-size: 0.88rem;
+    color: #444;
+    margin-bottom: 14px;
+    line-height: 1.6;
+}
+
+/* QRIS */
+.qris-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.qris-img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border: 2px solid #dde;
+    border-radius: 10px;
+    padding: 8px;
+    background: white;
+}
+
+.qris-placeholder {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #aaa;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #888;
     text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.82rem;
+    padding: 12px;
 }
 
-/* Notification Styles */
-.notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #2ecc71;
+.qris-placeholder i { font-size: 2.5rem; color: #bbb; }
+.qris-placeholder code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+
+/* Transfer Bank */
+.bank-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+
+.bank-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1.5px solid #dde;
+    border-radius: 10px;
+    background: #fafafa;
+    transition: border-color 0.2s;
+}
+
+.bank-item:hover { border-color: #3498db; }
+.bank-logo-name { width: 70px; flex-shrink: 0; }
+.bank-name { display: block; font-weight: 800; font-size: 1rem; color: #2c3e50; }
+.bank-detail { flex: 1; }
+
+.bank-norek {
+    display: block;
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2980b9;
+    letter-spacing: 1px;
+}
+
+.bank-atas-nama { display: block; font-size: 0.78rem; color: #888; margin-top: 2px; }
+
+.bank-copy-btn {
+    background: #eaf4fb;
+    border: 1.5px solid #3498db;
+    color: #2980b9;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.bank-copy-btn:hover { background: #3498db; color: white; }
+
+.bank-transfer-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #fff3cd;
+    border: 1.5px solid #ffc107;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.bank-transfer-total strong { font-size: 1.1rem; color: #e74c3c; }
+
+.pay-note {
+    font-size: 0.82rem;
+    color: #777;
+    background: #fafafa;
+    border-left: 3px solid #3498db;
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.5;
+}
+
+.pay-note i { color: #3498db; margin-top: 2px; flex-shrink: 0; }
+
+/* Footer pembayaran */
+.payment-footer {
+    flex-shrink: 0;
+    display: flex;
+    gap: 10px;
+    padding: 14px 22px;
+    border-top: 1px solid #eee;
+    background: white;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.pay-confirm-btn {
+    flex: 2;
+    background: #27ae60;
     color: white;
-    padding: 15px 20px;
-    border-radius: 5px;
-    z-index: 1200;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    animation: slideIn 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.95rem;
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+.pay-confirm-btn:hover { background: #219a52; }
+
+.pay-back-btn {
+    flex: 1;
+    background: #95a5a6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 0.9rem;
 }
 
-@keyframes slideOut {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-}
+.pay-back-btn:hover { background: #7f8c8d; }
 
-/* Responsive Styles */
-@media (max-width: 992px) {
-    .slide-content h2 {
-        font-size: 2rem;
-    }
-    
-    .slide-content p {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    /* REVISI POSISI CART ICON */
-    .navbar {
-        position: relative;
-    }
-    
-    .cart-icon {
-        position: absolute;
-        right: 60px;
-        top: 50%;
-        transform: translateY(-50%);
-        margin-left: 0;
-        z-index: 1001;
-    }
-    
-    .hamburger {
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 1001;
-        display: flex;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: -100%;
-        flex-direction: column;
-        background-color: white;
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-        z-index: 999;
-    }
-    
-    .nav-menu.active {
-        left: 0;
-    }
-    
-    .nav-menu li {
-        margin: 0;
-        padding: 15px 0;
-        border-bottom: 1px solid #eee;
-    }
-    
-    .slide-content {
-        padding: 20px;
-    }
-    
-    .slide-content h2 {
-        font-size: 1.5rem;
-    }
-    
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .cart-footer {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .cart-footer .btn {
-        width: 100%;
-    }
-    
-    header .container {
-        padding: 15px 50px 15px 15px;
-    }
-}
-
+/* Responsive */
 @media (max-width: 576px) {
-    .logo h1 {
-        font-size: 1.2rem;
+    .payment-content { width: 97%; }
+    .pay-method-tabs { flex-direction: row; }
+    .payment-footer { flex-direction: column; }
+    .pay-confirm-btn, .pay-back-btn { width: 100%; justify-content: center; }
+    .bank-item { flex-wrap: wrap; }
+    .bank-copy-btn { width: 100%; justify-content: center; }
+}
+
+/* Dark mode payment */
+body.dark .payment-content { background: #1e1e2e; }
+body.dark .payment-header { background: linear-gradient(135deg, #0e3d6a 0%, #121218 100%); }
+body.dark .payment-body { color: #d0d0d0; }
+body.dark .payment-summary { background: #1a253a; border-color: #2e3e5a; }
+body.dark .pay-sum-row { color: #aaa; }
+body.dark .pay-sum-grand { color: #e0e0e0; border-top-color: #2980b9; }
+body.dark .pay-method-title { color: #e0e0e0; }
+body.dark .pay-tab-btn { background: #252535; border-color: #3a3a50; color: #9090a8; }
+body.dark .pay-tab-btn:hover { border-color: #3498db; color: #62b8e8; background: #1e2a3a; }
+body.dark .pay-tab-btn.active { background: linear-gradient(135deg, #2980b9, #1a5f96); color: white; }
+body.dark .pay-instruction { color: #b0b0b0; }
+body.dark .qris-img { border-color: #3a3a50; background: #252535; }
+body.dark .qris-placeholder { border-color: #3a3a50; color: #666; }
+body.dark .bank-item { background: #252535; border-color: #3a3a50; }
+body.dark .bank-item:hover { border-color: #3498db; }
+body.dark .bank-name { color: #d0d0d0; }
+body.dark .bank-norek { color: #5ab0e0; }
+body.dark .bank-atas-nama { color: #7a8a8a; }
+body.dark .bank-copy-btn { background: #1e2a3a; border-color: #2980b9; color: #5ab0e0; }
+body.dark .bank-copy-btn:hover { background: #2980b9; color: white; }
+body.dark .bank-transfer-total { background: #2a2010; border-color: #7a6010; color: #c0c0c0; }
+body.dark .pay-note { background: #1e1e2e; border-left-color: #2980b9; color: #8090a8; }
+body.dark .payment-footer { background: #1e1e2e; border-top-color: #2e2e3e; }
+
+/* ============================================================
+   TOMBOL PILIH / GANTI EKSPEDISI
+   ============================================================ */
+.btn-pilih-ekspedisi {
+    width: 100%;
+    margin: 8px 0 4px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    box-shadow: 0 3px 12px rgba(52,152,219,0.35);
+    transition: background 0.2s, transform 0.1s;
+}
+.btn-pilih-ekspedisi:hover { background: linear-gradient(135deg, #2980b9, #1a6fa8); transform: translateY(-1px); }
+.btn-pilih-ekspedisi:active { transform: translateY(1px); }
+.btn-pilih-ekspedisi.btn-ganti-ekspedisi {
+    background: linear-gradient(135deg, #27ae60, #219a52);
+    font-size: 0.85rem;
+    box-shadow: 0 3px 12px rgba(39,174,96,0.35);
+}
+body.dark .btn-pilih-ekspedisi { background: linear-gradient(135deg, #2475b0, #1a5f96); }
+body.dark .btn-pilih-ekspedisi.btn-ganti-ekspedisi { background: linear-gradient(135deg, #1e8449, #196f3d); }
+
+/* ============================================================
+   BOTTOM SHEET — Pilih Ekspedisi
+   ============================================================ */
+.shipping-sheet-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1300;
+    justify-content: center;
+    align-items: flex-start;   /* muncul dari ATAS, tepat di bawah navbar */
+    padding-top: 68px;         /* sesuai tinggi navbar */
+}
+.shipping-sheet-overlay.active { background: rgba(0,0,0,0.65); }
+
+.shipping-sheet {
+    width: 100%;
+    max-width: 620px;
+    background: white;
+    border-radius: 0 0 20px 20px;   /* sudut membulat di BAWAH */
+    height: calc(100vh - 68px);     /* isi sisa layar sepenuhnya */
+    max-height: calc(100vh - 68px);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-100%);   /* slide masuk dari atas */
+    transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+.shipping-sheet.active { transform: translateY(0); }
+
+.sheet-handle {
+    display: none;   /* tidak dipakai saat sheet muncul dari atas */
+}
+
+.sheet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px 12px;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+}
+.sheet-header h3 { font-size: 1rem; color: #2c3e50; margin: 0; display: flex; align-items: center; gap: 8px; }
+.sheet-header h3 i { color: #3498db; }
+
+.sheet-close-btn {
+    background: #f0f0f0; border: none;
+    width: 32px; height: 32px; border-radius: 50%;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: #555; font-size: 0.9rem; transition: background 0.2s, color 0.2s;
+}
+.sheet-close-btn:hover { background: #e74c3c; color: white; }
+
+.sheet-body {
+    flex: 1; overflow-y: auto;
+    padding: 14px 20px 24px;
+    min-height: 0;
+}
+
+.sheet-search-wrap { position: relative; margin-bottom: 12px; }
+.sheet-body .courier-list { max-height: none; }
+
+/* Dark mode bottom sheet */
+body.dark .shipping-sheet { background: #1e1e2e; box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
+body.dark .sheet-handle { background: #3a3a50; }
+body.dark .sheet-header { border-bottom-color: #2e2e3e; }
+body.dark .sheet-header h3 { color: #e0e0e0; }
+body.dark .sheet-close-btn { background: #2e2e3e; color: #aaa; }
+body.dark .sheet-close-btn:hover { background: #e74c3c; color: white; }
+body.dark .sheet-body { background: #1e1e2e; }
+
+/* ================================================================
+   PAGINATION — tombol halaman per tab
+   Diletakkan tepat di atas footer; ukuran proporsional di PC & HP.
+   ================================================================ */
+
+/* Sembunyikan kartu yang bukan halaman aktif */
+.tab-content .product-card[data-page]:not(.is-current-page) {
+    display: none;
+}
+
+/* Kontainer pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 12px auto 6px;
+    padding: 0 16px;
+    flex-wrap: wrap;
+}
+
+/* Tombol halaman — ukuran clamp() agar fluid PC ↔ mobile */
+.page-btn {
+    min-width: clamp(38px, 4.6vw, 46px);
+    height:    clamp(38px, 4.6vw, 46px);
+    padding: 0 clamp(10px, 1.2vw, 14px);
+    font-size: clamp(14px, 1.4vw, 16px);
+    font-weight: 600;
+    font-family: inherit;
+    color: #2c3e50;
+    background: #fff;
+    border: 2px solid #d0d7de;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.page-btn:hover {
+    background: #eaf4fb;
+    border-color: #3498db;
+    color: #2980b9;
+    transform: translateY(-1px);
+}
+
+.page-btn.active {
+    background: #3498db;
+    border-color: #3498db;
+    color: #fff;
+    box-shadow: 0 3px 8px rgba(52, 152, 219, 0.35);
+    cursor: default;
+}
+
+.page-btn.active:hover {
+    transform: none;
+}
+
+/* Dark mode */
+body.dark .page-btn {
+    background: #2a2a3e;
+    color: #e0e0e0;
+    border-color: #3a3a50;
+}
+body.dark .page-btn:hover {
+    background: #34344a;
+    border-color: #5dade2;
+    color: #5dade2;
+}
+body.dark .page-btn.active {
+    background: #3498db;
+    border-color: #3498db;
+    color: #fff;
+}
+
+/* Mobile (HP Android) — ukuran sedikit lebih kecil & gap lebih rapat */
+@media (max-width: 576px) {
+    .pagination {
+        gap: 8px;
+        margin-top: 2px;
+        margin-bottom: 8px;
     }
-    
-    .slide-content h2 {
-        font-size: 1.3rem;
+    .page-btn {
+        min-width: 36px;
+        height: 36px;
+        padding: 0 10px;
+        font-size: 13px;
+        border-width: 1.5px;
+        border-radius: 8px;
     }
-    
-    .product-grid {
-        grid-template-columns: 1fr;
+}
+
+/* ================================================================
+   HERO BOTTOM TEXT — tagline di bawah gambar utama (hero slider)
+   Posisi: tepat di atas dots (yang ada di bottom: 20px), di-center
+   horizontal. Font size mengikuti .logo h1 (navbar) baik di
+   desktop maupun mobile, tidak bold, line-height rapat.
+   ================================================================ */
+.hero-bottom-text {
+    position: absolute;
+    bottom: 90px;             /* di atas .slider-dots (yang di bottom:20px) */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 900px;
+    text-align: center;
+    /* settingan font normal - no stylish - diatur di baris 1685 s/d 1692 */
+    /* =================================== */
+    /*color: #ffffff;                         /* mengatur color font */
+    /*font-size: 1.7rem;                      /* sama dgn .logo h1 di desktop */
+    /*font-weight: normal;                    /* TIDAK bold */
+    /*line-height: 1.15;                      /* rapat utk multi-baris */
+    /*letter-spacing: 0.01em;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.65);/* readable di gambar apapun */
+    /* =================================== */
+
+    /* PRESET 1: Stylish Klasik (Rekomendasi Pertama)*/
+    /* =================================== */
+    /*color: #ffffff;                         /* mengatur color font */
+    /*font-size: 1.7rem;                      /* sama dgn .logo h1 di desktop */
+    /*font-weight: 700;                       /* TIDAK bold */
+    /*line-height: 1.15;                      /* rapat utk multi-baris */
+    /*letter-spacing: 0.02em;
+    text-shadow: 0 5px 8px rgba(0,0,0,0.6); /* readable di gambar apapun */
+    /* =================================== */
+
+    /*PRESET 2: Glow / Bercahaya (Modern & Eye-catching)*/
+    /* =================================== */
+    /*color: #ffffff;                         /* mengatur color font */
+    /*font-size: 1.7rem;                      /* sama dgn .logo h1 di desktop */
+    /*font-weight: 500;                       /* TIDAK bold */
+    /*line-height: 1.15;                      /* rapat utk multi-baris */
+    /*letter-spacing: 0.01em;
+    text-shadow: 
+        0 0 8px rgba(255,255,255,0.9),
+        0 0 16px rgba(52,152,219,0.7),
+        0 0 24px rgba(52,152,219,0.5),
+        0 2px 6px rgba(0,0,0,0.7);          /* glow biru + shadow utk readability */
+    /* =================================== */
+
+    /*PRESET 3: Embossed / Engraved (Timbul ke Dalam)*/
+    /* =================================== */
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 700;                               /* lebih tebal */
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    text-shadow:
+        -1px -1px 1px rgba(0,0,0,0.5),              /* highlight gelap dari atas */
+         2px  2px 0 rgba(0,0,0,0.4),                /* shadow ke bawah-kanan */
+         0    4px 8px rgba(0,0,0,0.5);              /* drop shadow halus */
+
+    z-index: 10;
+    pointer-events: none;     /* jangan blok klik tombol slider */
+    margin: 0;
+    padding: 0;
+}
+
+/* Mobile (HP Android) — samakan dgn .logo h1 di mobile */
+@media (max-width: 576px) {
+    .hero-bottom-text {
+        font-size: 0.92rem;   /* sama dgn .logo h1 di mobile */
+        bottom: 123px;
+        width: 94%;
+        line-height: 1.1;     /* lebih rapat di mobile */
     }
-    
-    .slider-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
+}
+
+/* ================================================================
+   MUSIC PLAYER BUTTON — tombol Putar / Jeda musik latar
+   Posisi : kiri-atas di dalam .hero-slider (tepat di bawah navbar)
+   Style  : EMBOSSED (menonjol) — gradient + bevel border + shadow
+   Ukuran : proporsional (mobile max ~30% lebar layar)
+   ================================================================ */
+.music-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 15;                            /* di atas slide, di bawah modal */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 24px;
+    cursor: pointer;
+    user-select: none;
+
+    /* Font */
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.40);
+
+    /* EMBOSSED look — gradient atas-terang ke bawah-gelap */
+    background: linear-gradient(180deg, #5dade2 0%, #3498db 55%, #2874a6 100%);
+    border-top:    1.5px solid #7fbfe8;     /* highlight atas */
+    border-left:   1.5px solid #4ea8db;
+    border-right:  1.5px solid #1f5e87;     /* shadow kanan */
+    border-bottom: 2px   solid #154565;     /* shadow bawah (lebih gelap) */
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.30),
+        0 2px 4px  rgba(0,0,0,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.2s ease;
+}
+
+.music-toggle:hover {
+    filter: brightness(1.07);
+    box-shadow:
+        0 6px 14px rgba(0,0,0,0.35),
+        0 3px 6px  rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.40),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+}
+
+.music-toggle:active {
+    transform: translateY(1px);
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.30),
+        0 1px 2px rgba(0,0,0,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 2px 4px rgba(0,0,0,0.25);
+}
+
+.music-toggle .music-icon { font-size: 1rem; }
+
+/* Saat sedang diputar — animasi pulse halus pada ikon */
+.music-toggle.playing .music-icon {
+    animation: musicPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% { transform: scale(1);     opacity: 1;    }
+    50%      { transform: scale(1.18);  opacity: 0.85; }
+}
+
+/* ===== Dark mode — sedikit beda gradien ===== */
+body.dark .music-toggle {
+    background: linear-gradient(180deg, #4aa8e0 0%, #2475b0 55%, #1a5f96 100%);
+    border-top:    1.5px solid #5ab8f0;
+    border-left:   1.5px solid #2e86c1;
+    border-right:  1.5px solid #1060a0;
+    border-bottom: 2px   solid #0e4a80;
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.45),
+        0 2px 4px  rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 -2px 4px rgba(0,0,0,0.20);
+}
+
+/* ===== Tablet (medium) ===== */
+@media (max-width: 768px) and (min-width: 577px) {
+    .music-toggle {
+        top: 14px;
+        left: 14px;
+        padding: 8px 14px;
+        font-size: 0.85rem;
     }
-    
-    .cart-content {
-        width: 95%;
+}
+
+/* ===== Mobile (HP Android) — max ~30% lebar layar ===== */
+@media (max-width: 576px) {
+    .music-toggle {
+        top: 10px;
+        left: 10px;
+        padding: 6px 12px;
+        font-size: 0.74rem;
+        gap: 5px;
+        max-width: 30vw;            /* tidak lebih dari 30% lebar layar HP */
+        border-radius: 20px;
+        border-bottom-width: 1.5px; /* sedikit lebih tipis di mobile */
     }
-    
-    .cart-icon {
-        right: 50px;
+    .music-toggle .music-icon { font-size: 0.82rem; }
+    .music-toggle .music-label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* ================================================================
+   SOUND VISUALIZER — histogram bar (kanan-atas)
+   Ukuran (lebar & tinggi) dibuat sama PERSIS dgn tombol .music-toggle
+   Posisi: kanan-atas di dalam .slider-container, di bawah hamburger
+   ================================================================ */
+.music-visualizer {
+    position: absolute;
+    top: 20px;
+    right: 20px;                            /* sama dgn tombol musik tapi di kanan */
+    z-index: 15;
+    display: none;                          /* hidden by default */
+    align-items: center;
+    justify-content: center;
+
+    /* SAMA PERSIS dgn .music-toggle: padding, radius, gradient, border, shadow */
+    padding: 9px 18px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #5dade2 0%, #3498db 55%, #2874a6 100%);
+    border-top:    1.5px solid #7fbfe8;
+    border-left:   1.5px solid #4ea8db;
+    border-right:  1.5px solid #1f5e87;
+    border-bottom: 2px   solid #154565;
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.30),
+        0 2px 4px  rgba(0,0,0,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+
+    pointer-events: none;                   /* tdk klik-able, hanya display */
+    user-select: none;
+    overflow: hidden;
+}
+
+.music-visualizer.active { display: inline-flex; }
+
+.vis-bars {
+    display: inline-flex;
+    align-items: flex-end;                  /* bar tumbuh dari bawah */
+    justify-content: center;
+    gap: 3px;
+    height: 1.45em;                         /* setara tinggi teks tombol musik */
+    line-height: 1;
+}
+
+.vis-bar {
+    display: inline-block;
+    width: 3px;
+    height: 18%;                            /* default minimum (saat hampir hening) */
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 1.5px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.20);
+    transition: height 0.07s ease-out;
+    will-change: height;
+}
+
+/* ===== Judul lagu yg sedang diputar (di bawah visualizer) ===== */
+.music-now-playing {
+    position: absolute;
+    top: 70px;                              /* di bawah visualizer (20 + ~42 + 8) */
+    right: 20px;
+    z-index: 15;
+    display: none;
+    max-width: 240px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: right;
+    text-shadow:
+        0 1px 4px rgba(0,0,0,0.75),
+        0 1px 2px rgba(0,0,0,0.50);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+    letter-spacing: 0.01em;
+}
+
+.music-now-playing.active { display: block; }
+
+/* ===== Dark mode — gradien sedikit beda (samakan dgn .music-toggle dark) ===== */
+body.dark .music-visualizer {
+    background: linear-gradient(180deg, #4aa8e0 0%, #2475b0 55%, #1a5f96 100%);
+    border-top:    1.5px solid #5ab8f0;
+    border-left:   1.5px solid #2e86c1;
+    border-right:  1.5px solid #1060a0;
+    border-bottom: 2px   solid #0e4a80;
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.45),
+        0 2px 4px  rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 -2px 4px rgba(0,0,0,0.20);
+}
+
+/* ===== Tablet (medium) — selaras dgn .music-toggle tablet ===== */
+@media (max-width: 768px) and (min-width: 577px) {
+    .music-visualizer {
+        top: 14px;
+        right: 14px;
+        padding: 8px 14px;
+    }
+    .music-now-playing {
+        top: 60px;
+        right: 14px;
+        font-size: 0.78rem;
+        max-width: 200px;
+    }
+}
+
+/* ===== Mobile (HP Android) — selaras dgn .music-toggle mobile ===== */
+@media (max-width: 576px) {
+    .music-visualizer {
+        top: 10px;
+        right: 10px;
+        padding: 6px 12px;
+        max-width: 30vw;
+        border-radius: 20px;
+        border-bottom-width: 1.5px;
+    }
+    .vis-bars {
+        gap: 2px;
+        height: 1.2em;
+    }
+    .vis-bar {
+        width: 2px;
+    }
+    .music-now-playing {
+        top: 44px;
+        right: 10px;
+        max-width: 50vw;
+        font-size: 0.7rem;
     }
 }
